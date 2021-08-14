@@ -19,3 +19,4 @@
 */
 
 import './routes/user.routes'
+import './routes/sessions.routes'

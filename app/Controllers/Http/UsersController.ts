@@ -8,7 +8,7 @@ export default class UsersController {
     const userAlreadyExists = await User.findBy('email', email)
 
     if (userAlreadyExists) {
-      return response.status(400).json({ message: 'User already exists!' })
+      return response.badRequest({ message: 'User already exists!' })
     }
 
     const user = await User.create({
@@ -18,6 +18,28 @@ export default class UsersController {
       password,
       deliveryman,
     })
+
+    return user
+  }
+
+  public async update({ request, response }: HttpContextContract) {
+    const { name, email, cpf, password, deliveryman } = request.body()
+
+    const checkUserExists = await User.findBy('email', email)
+
+    if (!checkUserExists) {
+      return response.badRequest({ message: 'User does not exists!' })
+    }
+
+    const user = checkUserExists
+
+    user.name = name
+    user.email = email
+    user.cpf = cpf
+    user.password = password
+    user.deliveryman = deliveryman
+
+    await user.save()
 
     return user
   }
