@@ -4,9 +4,9 @@ import User from 'App/Models/User'
 
 export default class SessionsController {
   public async create({ request, response, auth }: HttpContextContract) {
-    const { email, password } = request.body()
+    const { cpf, password } = request.body()
 
-    const userExists = await User.findBy('email', email)
+    const userExists = await User.findBy('cpf', cpf)
 
     if (!userExists) {
       return response.badRequest({ message: 'Invalid credentials' })
