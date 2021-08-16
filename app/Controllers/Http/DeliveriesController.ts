@@ -1,7 +1,20 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Delivery from 'App/Models/Delivery'
+import User from 'App/Models/User'
 
 export default class DeliveriesController {
+  public async index({ auth, response }: HttpContextContract) {
+    const user = auth.user as User
+
+    if (user.deliveryman === false) {
+      const deliveries = await Delivery.all()
+
+      return deliveries
+    }
+
+    return response.badRequest({ message: 'User does not permissions!' })
+  }
+
   public async create({ request, response }: HttpContextContract) {
     const data = request.all()
 
