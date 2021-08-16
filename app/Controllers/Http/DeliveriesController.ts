@@ -34,6 +34,14 @@ export default class DeliveriesController {
     return delivery
   }
 
+  public async show({ auth }: HttpContextContract) {
+    const user = auth.user as User
+
+    const deliveries = await Delivery.findBy('deliveryman_id', user.id)
+
+    return deliveries
+  }
+
   public async update({ request, response, params }: HttpContextContract) {
     const data = request.all()
 
