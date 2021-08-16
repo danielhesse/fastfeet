@@ -12,6 +12,9 @@ export default class Delivery extends BaseModel {
   public deliveryman_id: string
 
   @column()
+  public recipient: string
+
+  @column()
   public product: string
 
   @column()

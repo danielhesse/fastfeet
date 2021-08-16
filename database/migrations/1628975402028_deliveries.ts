@@ -13,6 +13,7 @@ export default class Deliveries extends BaseSchema {
         .inTable('users')
         .onDelete('SET NULL')
         .nullable()
+      table.string('recipient').notNullable()
       table.string('product').notNullable()
       table.string('address').notNullable()
       table.double('postal_code').notNullable()
