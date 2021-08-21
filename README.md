@@ -2,11 +2,14 @@
 FastFeet
 
 ![Badge](https://img.shields.io/static/v1?label=DH&message=DOSOMETHINGGREAT&color=0070f3&style=<0070f3>&logo=rocket)
+
+
+<img alt="Happy" src=".github/preview.png" width="100%" />
 </h1>
 
 
 
-## 💻 Projeto
+## 💻 Projeto (Back-end)
 
 O FastFeet é uma aplicação desenvolvida para uma transportadora fictícia, onde por meio de um app, é possível controlar todo o fluxo de entregas dessa transportadora.
 
