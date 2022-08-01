@@ -1,13 +1,28 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 
 const server = express();
 
 server.use(express.json());
 
-server.use("/", (_: Request, response: Response) => {
-  return response.json({
-    code: 200,
-    message: "Hello World!",
+server.use((err: Error, _1: Request, response: Response, _2: NextFunction) => {
+  if (err instanceof Error) {
+    const [error, code] = err.message.split("|");
+
+    const statusCode = Number(code);
+
+    return response.status(statusCode | 400).json({
+      error: {
+        code: statusCode,
+        message: error,
+      },
+    });
+  }
+
+  return response.status(500).json({
+    error: {
+      code: 500,
+      message: err,
+    },
   });
 });
 
