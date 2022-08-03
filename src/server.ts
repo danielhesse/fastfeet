@@ -1,8 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
+import { routes } from "./routes";
 
 const server = express();
 
 server.use(express.json());
+
+server.use(routes);
 
 server.use((err: Error, _1: Request, response: Response, _2: NextFunction) => {
   if (err instanceof Error) {
