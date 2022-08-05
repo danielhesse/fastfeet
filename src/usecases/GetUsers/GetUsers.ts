@@ -1,9 +1,13 @@
 import { prisma } from "../../prisma";
 
+type GetUsersRequest = {
+  deliveryman: boolean;
+};
+
 export class GetUsers {
-  async execute() {
+  async execute({ deliveryman }: GetUsersRequest) {
     return prisma.user.findMany({
-      where: { deliveryman: false },
+      where: { deliveryman },
       orderBy: { createdAt: "desc" },
     });
   }
