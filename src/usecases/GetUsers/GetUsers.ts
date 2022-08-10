@@ -8,7 +8,7 @@ export class GetUsers {
   async execute({ deliveryman }: GetUsersRequest) {
     return prisma.user.findMany({
       where: { deliveryman },
-      orderBy: { createdAt: "desc" },
+      orderBy: { created_at: "desc" },
     });
   }
 }
