@@ -1,3 +1,4 @@
+import { UserMapper } from "../../mappers/UserMapper";
 import { prisma } from "../../prisma";
 
 type GetUsersRequest = {
@@ -6,9 +7,11 @@ type GetUsersRequest = {
 
 export class GetUsers {
   async execute({ deliveryman }: GetUsersRequest) {
-    return prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where: { deliveryman },
       orderBy: { created_at: "desc" },
     });
+
+    return users.map((user) => UserMapper.toDTO(user));
   }
 }
